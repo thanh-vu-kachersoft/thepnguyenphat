@@ -133,4 +133,23 @@ function konstic_custom_background_setup() {
 add_action( 'after_setup_theme', 'konstic_custom_background_setup' );
 
 
+add_theme_support( 'woocommerce' );
+add_theme_support( 'woocommerce-page-layouts' );
+add_theme_support( 'elementor-pro' );
 
+
+// Đổi chữ "Read more" thành "Xem thêm" trong WooCommerce Archive Products
+add_filter('woocommerce_product_add_to_cart_text', 'custom_woocommerce_product_read_more_text');
+add_filter('woocommerce_product_single_add_to_cart_text', 'custom_woocommerce_product_read_more_text');
+
+function custom_woocommerce_product_read_more_text($text) {
+    if ($text === 'Read more') {
+        return 'Xem thêm';
+    }
+    return $text;
+}
+
+// Đổi tiêu đề "Related products" thành "Sản phẩm tương tự"
+add_filter('woocommerce_product_related_products_heading', function($heading) {
+    return 'Sản phẩm tương tự';
+});
